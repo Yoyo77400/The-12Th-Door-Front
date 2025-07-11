@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+<<<<<<< HEAD
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -9,6 +10,15 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+=======
+import { Alexandria } from "next/font/google";
+import Providers from "@/components/PrivyConnection";
+import Navbar from "@/components/Navbar";
+import "./globals.css";
+
+const alexandria = Alexandria({
+  variable: "--font-alexandria",
+>>>>>>> d589705abaad460e6743e45691adb8f1e736e6fa
   subsets: ["latin"],
 });
 
@@ -24,10 +34,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+<<<<<<< HEAD
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+=======
+      <body className={`${alexandria.variable} antialiased bg-background`}>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+>>>>>>> d589705abaad460e6743e45691adb8f1e736e6fa
       </body>
     </html>
   );

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Image from "next/image";
 
 export default function Home() {
@@ -100,4 +101,11 @@ export default function Home() {
       </footer>
     </div>
   );
+=======
+"use client";
+import Image from "next/image";
+
+export default function Home() {
+  return <></>;
+>>>>>>> d589705abaad460e6743e45691adb8f1e736e6fa
 }
