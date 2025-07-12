@@ -1,11 +1,10 @@
 "use client";
-import Image from "next/image";
-import { Card } from "@/components/ui/card";
+import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
   return (
-    <div className="container h-screen">
-      <Card className="w-[200px] h-[200px]" />
+    <div className="h-full w-full">
+      <HeroSection />
     </div>
   );
 }
