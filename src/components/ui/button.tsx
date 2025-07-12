@@ -46,14 +46,60 @@ function Button({
     asChild?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
+  const isAnimated = className?.includes("animated");
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    props.onClick?.(e);
+
+    if (!isAnimated) return;
+
+    const button = e.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const count = 20;
+
+    for (let i = 0; i < count; i++) {
+      const particle = document.createElement("span");
+      particle.className = "particle";
+
+      const hue = Math.floor(Math.random() * 360);
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = Math.random() * 60 + 20;
+      const scale = Math.random() * 0.8 + 0.5;
+      const duration = Math.random() * 0.4 + 0.4;
+
+      const x = Math.cos(angle) * distance + "px";
+      const y = Math.sin(angle) * distance + "px";
+
+      particle.style.setProperty("--hue", hue.toString());
+      particle.style.setProperty("--x", x);
+      particle.style.setProperty("--y", y);
+      particle.style.setProperty("--scale", scale.toString());
+      particle.style.setProperty("--duration", `${duration}s`);
+
+      const offsetX = e.clientX - rect.left;
+      const offsetY = e.clientY - rect.top;
+
+      particle.style.left = `${offsetX}px`;
+      particle.style.top = `${offsetY}px`;
+
+      button.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, duration * 1000);
+    }
+  };
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      onClick={handleClick}
       {...props}
     />
   );
 }
+
+
 
 export { Button, buttonVariants };
