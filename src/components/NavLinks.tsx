@@ -10,7 +10,10 @@ const links = [
   { href: "#", label: "FAQ" },
 ];
 
-const v1Links = [{ href: "/rewards", label: "Rewards" }];
+const v1Links = [
+  { href: "/rewards", label: "Rewards" },
+  { href: "/collection", label: "Collection" },
+];
 
 export default function NavLinks() {
   const pathname = usePathname();
@@ -33,7 +36,7 @@ export default function NavLinks() {
         v1Links.map((link) => (
           <Link
             key={link.label}
-            href={link.href}
+            href={"/v1" + link.href}
             className="text-sm font-medium hover:text-purple-400 transition"
           >
             {link.label}

@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -7,7 +8,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Timeline from "./Timeline";
-import SportsCard from "./SportsCard";
 
 export default function Description() {
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Alexandria } from "next/font/google";
-import Providers from "@/components/PrivyConnection";
 import Navbar from "@/components/Navbar";
+import Providers from "@/components/DynamicProvider";
 import "./globals.css";
 
 const alexandria = Alexandria({
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${alexandria.variable} antialiased bg-background mx-auto md:px-24`}
+        className={`${alexandria.variable} antialiased bg-background mx-auto`}
       >
         <Providers>
           <Navbar />

@@ -1,4 +1,3 @@
-"use client";
 import HeroSection from "@/components/HeroSection";
 import Description from "@/components/Description";
 
@@ -10,5 +9,3 @@ export default function Home() {
     </div>
   );
 }
-
-
