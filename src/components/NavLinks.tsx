@@ -21,13 +21,13 @@ export default function NavLinks() {
     <nav className="flex gap-6">
       {!isAppLaunched &&
         links.map((link) => (
-          <a
+          <Link
             key={link.label}
             href={link.href}
             className="text-sm font-medium hover:text-purple-400 transition"
           >
             {link.label}
-          </a>
+          </Link>
         ))}
       {isAppLaunched &&
         v1Links.map((link) => (
