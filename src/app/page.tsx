@@ -1,18 +1,13 @@
 "use client";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Footer } from "@/components/Footer";
-
+import HeroSection from "@/components/HeroSection";
+import Description from "@/components/Description";
 
 export default function Home() {
-    return (
-    <>
-      <main className="p-8">
-        <Button className="animated">Explosion</Button>
-        <Button>Normal</Button>
-      </main>
-      <Footer />
-    </>
+  return (
+    <div className="h-full w-full px-24">
+      <HeroSection />
+      <Description />
+    </div>
   );
 }
 
