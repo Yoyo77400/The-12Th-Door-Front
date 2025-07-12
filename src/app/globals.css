@@ -123,3 +123,33 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+button.animated {
+  position: relative;
+  overflow: visisble;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: hsl(var(--hue, 0), 80%, 60%);
+  pointer-events: none;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: explode 1s ease-out forwards;
+  z-index: 10;
+}
+
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0.5);
+  }
+}
