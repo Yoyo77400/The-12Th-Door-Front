@@ -1,6 +1,5 @@
 import HeroSection from "@/components/HeroSection";
 import Description from "@/components/Description";
-import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 
 export default function Home() {
@@ -9,7 +8,6 @@ export default function Home() {
       <HeroSection />
       <Description />
       <FAQ />
-      <Footer />
     </div>
   );
 }
