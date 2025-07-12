@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${alexandria.variable} antialiased bg-background mx-auto`}
+        className={`${alexandria.variable} antialiased bg-background mx-auto md:px-24`}
       >
         <Providers>
           <Navbar />
