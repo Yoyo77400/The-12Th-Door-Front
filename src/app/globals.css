@@ -139,7 +139,7 @@ button.animated {
   pointer-events: none;
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
-  animation: explode 600ms ease-out forwards;
+  animation: explode 1s ease-out forwards;
   z-index: 10;
 }
 
