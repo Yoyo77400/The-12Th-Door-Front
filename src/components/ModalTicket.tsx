@@ -33,7 +33,7 @@ export type TicketData = {
   ownerPublicKey: string;
 };
 
-export default function ScanPage() {
+export default function ModalTicket() {
   const [scanStatus, setScanStatus] = useState<ScanStatus>("scanning");
   const [ticketData, setTicketData] = useState<TicketData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -141,22 +141,22 @@ export default function ScanPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-4 max-w-md">
-      <h1 className="text-2xl font-bold text-white/90 mb-6 text-center">
-        Scan your ticket
-      </h1>
+<div className="container mx-auto px-4 py-4 max-w-md">
+  <h1 className="text-2xl font-bold text-white/90 mb-6 text-center">
+    Scan your ticket
+  </h1>
 
-      {scanStatus === "scanning" && (
-        <div className="bg-[#0E0A0F]/80 border border-[#443149]/60 rounded-lg p-6 shadow-xl">
-          <h2 className="text-xl font-semibold text-white/90 mb-4">
-            Scan QR Code
-          </h2>
-          <p className="text-white/70 mb-4">
-            Position your ticket in the frame to scan automatically
-          </p>
-          <QRScanner onScan={handleScan} />
-        </div>
-      )}
+  {scanStatus === "scanning" && (
+    <div className="bg-[#0E0A0F]/80 border border-[#443149]/60 rounded-lg p-6 shadow-xl">
+      <h2 className="text-xl font-semibold text-white/90 mb-4">
+        Scan QR Code
+      </h2>
+      <p className="text-white/70 mb-4">
+        Position your ticket in the frame to scan automatically
+      </p>
+      <QRScanner onScan={handleScan} />
+    </div>
+  )}
 
       {scanStatus === "verifying" && ticketData && detectedStadium && (
         <div className="bg-[#0E0A0F]/80 border border-[#443149]/60 rounded-lg p-6 shadow-xl">
