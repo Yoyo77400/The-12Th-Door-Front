@@ -153,3 +153,13 @@ button.animated {
     transform: translate(var(--x), var(--y)) scale(0.5);
   }
 }
+
+
+/* Tailwind custom scrollbar hiding */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
