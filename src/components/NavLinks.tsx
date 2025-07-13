@@ -1,47 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "Leaderboard" },
-  { href: "#", label: "Rewards" },
-  { href: "#", label: "FAQ" },
-];
-
-const v1Links = [
-  { href: "/rewards", label: "Rewards" },
+  { href: "/leaderboard", label: "Leaderboard" },
+  { href: "/reward", label: "Reward" },
   { href: "/collection", label: "Collection" },
+  { href: "/scan", label: "Scan" },
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname();
-
-  const isAppLaunched = pathname.startsWith("/v1");
-
   return (
-    <nav className="flex gap-6">
-      {!isAppLaunched &&
-        links.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className="text-sm font-medium hover:text-purple-400 transition"
-          >
-            {link.label}
-          </Link>
-        ))}
-      {isAppLaunched &&
-        v1Links.map((link) => (
-          <Link
-            key={link.label}
-            href={"/v1" + link.href}
-            className="text-sm font-medium hover:text-purple-400 transition"
-          >
-            {link.label}
-          </Link>
-        ))}
+    <nav className="flex md:flex-row flex-col md:gap-6 gap-6 z-50 md:items-center">
+      {links.map((link) => (
+        <Link
+          key={link.label}
+          href={link.href}
+          className="cursor-pointer md:text-sm text-xl font-medium hover:text-purple-400 transition text-white/80 md:py-0 py-2 block text-center"
+        >
+          {link.label}
+        </Link>
+      ))}
     </nav>
   );
 }

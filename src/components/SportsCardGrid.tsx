@@ -57,7 +57,7 @@ export default function SportsCardGrid({
                 <p className="text-white/70 text-sm z-10">{card.date}</p>
                 {card.rarity && (
                   <span
-                    className={`inline-block px-2 py-1 rounded-full text-xs mt-1 ${
+                    className={`inline-block text-white/80 px-2 py-1 rounded-full text-xs mt-1 ${
                       card.rarity === "common"
                         ? "bg-gray-600"
                         : card.rarity === "rare"

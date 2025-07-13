@@ -6,31 +6,18 @@ import SportsCard from "@/components/SportsCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-// Données d'exemple pour les cartes
 const sampleCards: CardItem[] = [
   {
     id: 1,
     match: "PSG - Strasbourg",
     date: "12 Aug 2023",
-    playerName: "Kylian Mbappé",
+    playerName: "Fabian Ruiz",
     teamName: "Paris Saint-Germain",
-    imageSrc: "/images/Sport-card-kvara.png",
+    imageSrc: "/images/fabian.png",
     rarity: "rare",
-    action: "Tackle of the match",
+    action: "Longshot goal",
     competition: "Ligue 1",
     result: "Victory 3-0",
-  },
-  {
-    id: 2,
-    match: "PSG - Lens",
-    date: "26 Aug 2023",
-    playerName: "Ousmane Dembélé",
-    teamName: "Paris Saint-Germain",
-    imageSrc: "/images/Sport-card-kvara.png",
-    rarity: "epic",
-    action: "",
-    competition: "Ligue 1",
-    result: "Victory 2-1",
   },
   {
     id: 3,
@@ -46,11 +33,11 @@ const sampleCards: CardItem[] = [
   },
   {
     id: 4,
-    match: "PSG - Marseille",
-    date: "27 Oct 2023",
+    match: "PSG - Real Madrid",
+    date: "27 Oct 2024",
     playerName: "Vitinha",
     teamName: "Paris Saint-Germain",
-    imageSrc: "/images/Sport-card-kvara.png",
+    imageSrc: "/images/vitinha.png",
     rarity: "common",
     action: "",
     competition: "Ligue 1",
@@ -58,11 +45,11 @@ const sampleCards: CardItem[] = [
   },
   {
     id: 5,
-    match: "PSG - Monaco",
-    date: "24 Nov 2023",
+    match: "PSG - Real Madrid",
+    date: "11 July 2025",
     playerName: "Gonçalo Ramos",
     teamName: "Paris Saint-Germain",
-    imageSrc: "/images/Sport-card-kvara.png",
+    imageSrc: "/images/diogo.png",
     rarity: "rare",
     action: "",
     competition: "Ligue 1",
@@ -75,9 +62,7 @@ export default function CollectionPage() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Filtrer les cartes en fonction du filtre actif et de la recherche
   const filteredCards = sampleCards.filter((card) => {
-    // Filtre par compétition
     const matchesFilter =
       activeFilter === "all" ||
       (activeFilter === "ligue1" && card.competition === "Ligue 1") ||
