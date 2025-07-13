@@ -23,11 +23,15 @@ export default function UploadForm() {
 
   return (
     <div className="p-4">
-      <input
-        type="file"
-        accept="image/*"
-        onChange={(e) => setFile(e.target.files?.[0] || null)}
-      />
+      <label style={{ display: 'inline-block', padding: '0.5rem 1rem', background: '#333', color: '#fff', borderRadius: '4px', cursor: 'pointer', margin: '1rem' }}>
+        Sélectionner un billet
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setFile(e.target.files?.[0] || null)}
+          style={{ display: 'none' }}
+        />
+      </label>
       <Button onClick={handleUpload}>Scanner le billet</Button>
       {result && <p className="mt-4">📎 Code détecté : {result}</p>}
     </div>
