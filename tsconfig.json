@@ -19,7 +19,13 @@
       }
     ],
     "paths": {
+<<<<<<< HEAD
       "@/*": ["./src/*"]
+=======
+      "@/*": ["./src/*"],
+      "@/components": ["./src/components/*"],
+      "@/data": ["./src/lib/data/*"]
+>>>>>>> 2e436c1ab173101654739e590124cec9bcd32fc9
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
