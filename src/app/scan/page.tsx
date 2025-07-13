@@ -34,10 +34,10 @@ export type TicketData = {
 };
 
 export default function ScanPage() {
-  const [scanStatus, setScanStatus] = useState<ScanStatus>("idle");
+  const [scanStatus, setScanStatus] = useState<ScanStatus>("scanning");
   const [ticketData, setTicketData] = useState<TicketData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [selectedStadium, setSelectedStadium] = useState<Stadium | null>(null);
+  const [detectedStadium, setDetectedStadium] = useState<Stadium | null>(null);
   const [isLocationValid, setIsLocationValid] = useState<boolean | null>(null);
 
   // Liste des stades disponibles
@@ -78,84 +78,101 @@ export default function ScanPage() {
       // Essayer de parser les données du QR code
       const parsedData: TicketData = JSON.parse(data);
       setTicketData(parsedData);
-      setScanStatus("verifying");
+
+      // Déterminer le stade en fonction des données du ticket
+      const stadium = determineStadiumFromTicket(parsedData);
+
+      if (stadium) {
+        setDetectedStadium(stadium);
+        setScanStatus("verifying");
+      } else {
+        setErrorMessage(
+          "Impossible de déterminer le stade pour cet événement."
+        );
+        setScanStatus("error");
+      }
     } catch (error) {
       setErrorMessage("QR code invalide. Veuillez réessayer.");
       setScanStatus("error");
     }
   };
 
+  // Fonction pour déterminer le stade en fonction des données du ticket
+  const determineStadiumFromTicket = (ticket: TicketData): Stadium | null => {
+    // Logique pour associer un événement à un stade
+    // Cette logique peut être adaptée en fonction de vos données
+    const eventNameLower = ticket.eventName.toLowerCase();
+
+    if (eventNameLower.includes("paris") || eventNameLower.includes("psg")) {
+      return stadiums.find((s) => s.id === "parc-des-princes") || null;
+    } else if (
+      eventNameLower.includes("marseille") ||
+      eventNameLower.includes("om")
+    ) {
+      return stadiums.find((s) => s.id === "stade-velodrome") || null;
+    } else if (
+      eventNameLower.includes("lyon") ||
+      eventNameLower.includes("ol")
+    ) {
+      return stadiums.find((s) => s.id === "groupama-stadium") || null;
+    }
+
+    // Si aucune correspondance n'est trouvée, on peut utiliser l'IA pour analyser
+    // Pour l'instant, on retourne null
+    return null;
+  };
+
   const handleLocationVerified = (isValid: boolean) => {
     setIsLocationValid(isValid);
     setScanStatus(isValid ? "success" : "error");
     if (!isValid) {
-      setErrorMessage("Vous n'êtes pas à l'emplacement du stade sélectionné.");
+      setErrorMessage(
+        "Vous n'êtes pas à l'emplacement du stade de l'événement."
+      );
     }
   };
 
   const resetScan = () => {
-    setScanStatus("idle");
+    setScanStatus("scanning");
     setTicketData(null);
     setErrorMessage("");
+    setDetectedStadium(null);
     setIsLocationValid(null);
   };
 
   return (
     <div className="container mx-auto px-4 py-4 max-w-md">
       <h1 className="text-2xl font-bold text-white/90 mb-6 text-center">
-        Scanner votre ticket
+        Scan your ticket
       </h1>
 
-      {scanStatus === "idle" && (
-        <div className="space-y-6">
-          <div className="bg-[#0E0A0F]/80 border border-[#443149]/60 rounded-lg p-6 shadow-xl">
-            <h2 className="text-xl font-semibold text-white/90 mb-4">
-              Sélectionnez un stade
-            </h2>
-            <StadiumSelector
-              stadiums={stadiums}
-              selectedStadium={selectedStadium}
-              onSelectStadium={setSelectedStadium}
-            />
-
-            {selectedStadium && (
-              <div className="mt-6">
-                <button
-                  onClick={() => setScanStatus("scanning")}
-                  className="w-full bg-[#443149] hover:bg-[#443149]/80 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                >
-                  Commencer le scan
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {scanStatus === "scanning" && selectedStadium && (
+      {scanStatus === "scanning" && (
         <div className="bg-[#0E0A0F]/80 border border-[#443149]/60 rounded-lg p-6 shadow-xl">
           <h2 className="text-xl font-semibold text-white/90 mb-4">
-            Scannez votre QR Code
+            Scan QR Code
           </h2>
+          <p className="text-white/70 mb-4">
+            Position your ticket in the frame to scan automatically
+          </p>
           <QRScanner onScan={handleScan} />
-          <button
-            onClick={resetScan}
-            className="w-full mt-4 border border-[#443149]/60 text-white/80 py-2 px-4 rounded-lg font-medium hover:bg-[#443149]/20 transition-colors"
-          >
-            Annuler
-          </button>
         </div>
       )}
 
-      {scanStatus === "verifying" && ticketData && selectedStadium && (
+      {scanStatus === "verifying" && ticketData && detectedStadium && (
         <div className="bg-[#0E0A0F]/80 border border-[#443149]/60 rounded-lg p-6 shadow-xl">
           <h2 className="text-xl font-semibold text-white/90 mb-4">
-            Vérification de la localisation
+            Location verification
           </h2>
           <TicketInfo ticket={ticketData} />
+          <div className="mt-2 mb-4 bg-[#443149]/20 p-3 rounded-lg">
+            <p className="text-white/80 text-sm">
+              <span className="font-medium">Detected stadium:</span>{" "}
+              {detectedStadium.name}
+            </p>
+          </div>
           <div className="mt-4">
             <LocationVerifier
-              stadium={selectedStadium}
+              stadium={detectedStadium}
               onLocationVerified={handleLocationVerified}
             />
           </div>
@@ -167,7 +184,7 @@ export default function ScanPage() {
           success={scanStatus === "success"}
           message={
             scanStatus === "success"
-              ? "Ticket validé avec succès !"
+              ? "Ticket validated successfully !"
               : errorMessage
           }
           ticketData={ticketData}
