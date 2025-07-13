@@ -6,6 +6,7 @@ const links = [
   { href: "/leaderboard", label: "Leaderboard" },
   { href: "/reward", label: "Reward" },
   { href: "/collection", label: "Collection" },
+  { href: "/scan", label: "Scan" },
 ];
 
 export default function NavLinks() {
