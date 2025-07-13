@@ -62,9 +62,7 @@ export default function CollectionPage() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // Filtrer les cartes en fonction du filtre actif et de la recherche
   const filteredCards = sampleCards.filter((card) => {
-    // Filtre par compétition
     const matchesFilter =
       activeFilter === "all" ||
       (activeFilter === "ligue1" && card.competition === "Ligue 1") ||

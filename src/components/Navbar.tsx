@@ -2,12 +2,16 @@
 
 import Logo from "./Logo";
 import NavLinks from "@/components/NavLinks";
-import { usePathname } from "next/navigation";
 import WalletConnection from "./WalletConnection";
+import { useDynamicContext, useIsLoggedIn } from "@dynamic-labs/sdk-react-core";
+import { Button } from "./ui/button";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const isAppLaunched = pathname.startsWith("/v1");
+  const { primaryWallet } = useDynamicContext();
+  const isLoggedIn = useIsLoggedIn();
+
+  // La publicKey peut être récupérée à partir du primaryWallet
+  const publicKey = primaryWallet?.address;
 
   return (
     <header className="text-foreground text-white pt-2 pb-2 px-6 flex justify-between items-center border-b border-[#443149]/60">
@@ -17,11 +21,7 @@ export default function Navbar() {
       <div className="items-center gap-10 hidden lg:flex">
         <NavLinks />
       </div>
-      {!isAppLaunched && (
-        <div className="flex items-center gap-6">
-          <WalletConnection />
-        </div>
-      )}
+      {!isLoggedIn ? <WalletConnection /> : <Button>{publicKey}</Button>}
     </header>
   );
 }
