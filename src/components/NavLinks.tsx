@@ -11,12 +11,12 @@ const links = [
 
 export default function NavLinks() {
   return (
-    <nav className="flex gap-6 z-50">
+    <nav className="flex md:flex-row flex-col md:gap-6 gap-6 z-50 md:items-center">
       {links.map((link) => (
         <Link
           key={link.label}
           href={link.href}
-          className="cursor-pointer text-sm font-medium hover:text-purple-400 transition"
+          className="cursor-pointer md:text-sm text-xl font-medium hover:text-purple-400 transition text-white/80 md:py-0 py-2 block text-center"
         >
           {link.label}
         </Link>
