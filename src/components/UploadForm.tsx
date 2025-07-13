@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 
 export default function UploadForm() {
   const [file, setFile] = useState<File | null>(null);
   const [result, setResult] = useState<string>("");
+  const { primaryWallet } = useDynamicContext();
 
   const handleUpload = async () => {
     if (!file) return;
@@ -18,7 +20,7 @@ export default function UploadForm() {
     });
 
     const data = await res.json();
-    setResult(data.text || "Aucun texte trouvé");
+    setResult(data.message || "Aucun texte trouvé");
   };
 
   return (

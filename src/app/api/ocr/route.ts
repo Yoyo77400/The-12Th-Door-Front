@@ -15,14 +15,21 @@ export async function POST(req: NextRequest) {
 
   console.log("text", text);
 
-  const response = await fetch(process.env.EXPRESS_API + "/uniqs", {
-    method: "POST",
-    body: JSON.stringify({ code: text }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
+  // const response = await fetch(process.env.EXPRESS_API + "/uniqs", {
+  //   method: "POST",
+  //   body: JSON.stringify({ code_id: text }),
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // });
+  // const data = await response.json();
 
-  return NextResponse.json({ data });
+  if (text) {
+    return NextResponse.json(
+      { message: "Billet trouvé, vous êtes inscrit dans la raffle" },
+      { status: 200 }
+    );
+  }
+
+  return NextResponse.json({ message: "Billet non trouvé" }, { status: 200 });
 }
